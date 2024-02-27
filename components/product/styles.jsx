@@ -7,14 +7,23 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
+    box:{
+        width: '60%',
+        backgroundColor:'#ffddd2',
+        borderRadius: 15,
+        padding: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     text:{
         fontSize: 40,
         fontWeight:'bold',
         marginTop:30
     },
     text2:{
-        fontSize: 20,
+        fontSize: 25,
         fontWeight:'bold',
+
     },
     button:{
         backgroundColor:'#37eb34',
@@ -31,11 +40,10 @@ const styles = StyleSheet.create({
     },
     produto:{
         width:150,
-        height: 150,
+        height: 190,
         backgroundColor:'#ffddd2',
-        borderRadius: 15,
         padding:10,
-        margin:10,
+        margin:20,
         alignItems:'center',
     }
 })

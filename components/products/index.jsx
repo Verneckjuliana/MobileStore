@@ -1,55 +1,67 @@
-import React, {useState} from "react";
-import { View, Text, TextInput, Pressable, FlatList } from "react-native";
-import styles from "./styles";
+import { View, SafeAreaView, Text, Pressable, FlatList, Image } from "react-native"
+import styles from "./styles"
 
-export default function Products(){
+export default function Products({ navigation }) {
 
     const lista = [
         {
-            id: '1',
-            pastel: 'Carne',
-            valor: 'R$ 7,00'
+            id: 1,
+            nome: 'XTUDO',
+            preco: 'R$ 25,00',
+            foto: 'https://lanchonetesabormineiro.com.br/wp-content/uploads/2023/05/receitas-de-x-tudo.jpg'
         },
         {
-            id: '2',
-            pastel: 'Pizza',
-            valor: 'R$ 7,00'
+            id: 2,
+            nome: 'XSALADA',
+            preco: 'R$ 15,00',
+            foto: 'https://lanchonetesabormineiro.com.br/wp-content/uploads/2023/05/d0416bbddd7e82156eb29941b516e8fd-snack-bar.jpg'
         },
         {
-            id: '3',
-            pastel: 'Frango',
-            valor: 'R$ 7,00'
+            id: 3,
+            nome: 'XEGG',
+            preco: 'R$ 20,00',
+            foto: 'https://lanchonetesabormineiro.com.br/wp-content/uploads/2023/05/x-egg-73519.jpg'
         },
         {
-            id: '4',
-            pastel: 'Queijo',
-            valor: 'R$ 7,00'
+            id: 4,
+            nome: 'XFRANGO',
+            preco: 'R$ 30,00',
+            foto: 'https://lanchonetesabormineiro.com.br/wp-content/uploads/2023/05/x-frango-73524.jpg'
         },
         {
-            id: '5',
-            pastel: 'Chocolate',
-            valor: 'R$ 10,00'
-        }
+            id: 5,
+            nome: 'XBACON',
+            preco: 'R$ 28,00',
+            foto: 'https://lanchonetesabormineiro.com.br/wp-content/uploads/2023/05/Promocao_201604250326298462d3ef9f92300092a34b211e303c1b.jpg'
+        },
+
     ]
 
-    return(
-        <View style={styles.container}>
-            <View style={styles.loginBox}>
-                <View>
-                    <Text style={styles.title}>Products</Text>
-                    <FlatList
-                        data = {lista}
-                        numColumns={2}
-                        renderItem={({item})=>
-                            <View>
-                                <Text>Pastel: {item.pastel} Valor: {item.valor}</Text>
-                            </View>
-                    }
-                    >
+    return (
+        < SafeAreaView style={styles.container}>
+            <Text style={styles.text}>Produtos</Text>
+            <FlatList
+                data={lista}
+                numColumns={2}
+                renderItem={({ item }) =>
+                    <View style={styles.produto}>
+                        <Text style={styles.text2}>{item.nome}</Text>
+                        <Pressable
+                            onPress={()=>navigation.navigate('Product', {
+                                lanche: item.nome,
+                                valor: item.preco,
+                                imagem: item.foto,
+                                id: item.id
+                            })}
+                        
+                        >
+                            <Image source={{ uri: item.foto }} style={{ width: 50, height: 50 }} />
+                        </Pressable>
+                        <Text style={styles.text2}>{item.preco}</Text>
 
-                    </FlatList>
-                </View>
-            </View>
-        </View>
+                    </View>
+
+                } />
+        </SafeAreaView>
     )
 }
