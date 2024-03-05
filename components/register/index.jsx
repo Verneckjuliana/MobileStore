@@ -1,16 +1,27 @@
 import React, {useState} from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import styles from "./styles";
 import app from "../fireBaseConfig";
+import axios from "axios";
 
-export default function Login({navigation}){
+export default function Register({navigation}){
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
+    const [cep, setCep] = useState('')
+    const [rua, setRua] = useState('')
     const auth = getAuth(app);
+
+    function pesquisar(){
+        console.log("entrou")
+        axios.get(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => {
+            console.log(response.data.logradouro)
+        })
+    }
     
-    function logar(){
-        signInWithEmailAndPassword(auth, user, pass)
+    function cadastrar(){
+        createUserWithEmailAndPassword(auth, user, pass)
          .then((userCredential) => {
             const user = userCredential.user;
             navigation.navigate("Home")
@@ -47,9 +58,18 @@ export default function Login({navigation}){
                     </TextInput>
                 </View>
                 <View style={styles.box}>
+                    <TextInput
+                        placeholder='CEP'
+                        style={styles.inputBox}
+                        onChangeText={setCep}
+                        value={cep}
+                    >
+                    </TextInput>
+                </View>
+                <View style={styles.box}>
                     <Pressable 
                         style={styles.button}
-                        onPress={()=>logar()}
+                        onPress={()=>pesquisar()}
                         >
                         <Text style={styles.textButton}>OK</Text>
                     </Pressable>

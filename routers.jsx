@@ -6,6 +6,7 @@ import Login from "./components/login";
 import Home from "./components/home";
 import Products from "./components/products";
 import Product from "./components/product";
+import Register from "./components/register";
 
 const Pilha = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -57,6 +58,16 @@ function MyTabs(){
                     )
                 }}
             />
+            <Tab.Screen
+                name="Register"
+                component={Register}
+                options={{
+                    headerShown: false,
+                    tabBarIcon:({size, color})=>(
+                        <Feather name="user-plus" size={size} color={color} />
+                    )
+                }}
+            />
         </Tab.Navigator>
     )
 }
@@ -92,6 +103,12 @@ export default function Routers(){
                 <Pilha.Screen
                     name="Product"
                     component={Product}
+                    options={{headerShown:false}}
+                >
+                </Pilha.Screen>
+                <Pilha.Screen
+                    name="Register"
+                    component={Register}
                     options={{headerShown:false}}
                 >
                 </Pilha.Screen>
